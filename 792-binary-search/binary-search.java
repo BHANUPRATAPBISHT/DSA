@@ -1,9 +1,8 @@
 class Solution {
     public int search(int[] nums, int target) {
-       
         int l=0;
         int r=nums.length-1;
-       
+        int i=0;
         while(l<=r)
         {
             int mid=(l+r)/2;
@@ -21,6 +20,6 @@ class Solution {
             }
         }
         return -1;
-       
+        
     }
 }
