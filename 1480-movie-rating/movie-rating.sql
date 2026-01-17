@@ -1,0 +1,24 @@
+# Write your MySQL query statement below
+(
+    -- 1. Finding the User Winner
+    SELECT u.name AS results
+    FROM MovieRating mr
+    JOIN Users u ON mr.user_id = u.user_id
+    GROUP BY mr.user_id
+    -- Order by count of ratings (most first), then name alphabetically
+    ORDER BY COUNT(mr.movie_id) DESC, u.name ASC
+    LIMIT 1
+)
+UNION ALL
+(
+    -- 2. Finding the Movie Winner
+    SELECT m.title AS results
+    FROM MovieRating mr
+    JOIN Movies m ON mr.movie_id = m.movie_id
+    -- Filter specifically for February 2020
+    WHERE mr.created_at LIKE '2020-02-%'
+    GROUP BY mr.movie_id
+    -- Order by highest average rating, then title alphabetically
+    ORDER BY AVG(mr.rating) DESC, m.title ASC
+    LIMIT 1
+);
